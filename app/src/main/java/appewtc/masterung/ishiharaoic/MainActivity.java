@@ -1,18 +1,99 @@
 package appewtc.masterung.ishiharaoic;
 
+import android.media.MediaPlayer;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    //Explicit
+    private TextView txtQuestion;
+    private ImageView imvIshihara;
+    private RadioGroup ragChoice;
+    private RadioButton radChoice1, radChoice2, radChoice3, radChoice4;
+    private Button btnAnswer;
+    private int intRadioButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
+
+        // Initial Widget
+        initialWidget();
+
+        //Button Controller
+        buttonController();
+
+        //Radio Controller
+        radioController();
+
+
+    }   // onCreate
+
+    private void radioController() {
+
+        ragChoice.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                //Sound Effect
+                MediaPlayer soundRadio = MediaPlayer.create(getBaseContext(), R.raw.effect_btn_shut);
+                soundRadio.start();
+
+                //Setup RadioButton
+                switch (checkedId) {
+                    case R.id.radioButton:
+                        
+                        break;
+                    case R.id.radioButton2:
+                        break;
+                    case R.id.radioButton3:
+                        break;
+                    case R.id.radioButton4:
+                        break;
+                    default:
+                        break;
+                }   // switch
+
+
+            }   // event
+        });
+
+    }   // radioController
+
+    private void buttonController() {
+        btnAnswer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //Sound Effect
+                MediaPlayer soundButton = MediaPlayer.create(getBaseContext(), R.raw.effect_btn_long);
+                soundButton.start();
+            }   // event
+        });
+    }   // buttonController
+
+    private void initialWidget() {
+        txtQuestion = (TextView) findViewById(R.id.txtQuestion);
+        imvIshihara = (ImageView) findViewById(R.id.imageView);
+        ragChoice = (RadioGroup) findViewById(R.id.radChoice);
+        radChoice1 = (RadioButton) findViewById(R.id.radioButton);
+        radChoice2 = (RadioButton) findViewById(R.id.radioButton2);
+        radChoice3 = (RadioButton) findViewById(R.id.radioButton3);
+        radChoice4 = (RadioButton) findViewById(R.id.radioButton4);
+        btnAnswer = (Button) findViewById(R.id.button);
+    }   // initialWidget
 
 
     @Override
@@ -36,4 +117,4 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-}
+}   // Main Class
