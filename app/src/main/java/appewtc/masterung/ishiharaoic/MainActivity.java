@@ -1,5 +1,6 @@
 package appewtc.masterung.ishiharaoic;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -21,7 +23,7 @@ public class MainActivity extends ActionBarActivity {
     private RadioGroup ragChoice;
     private RadioButton radChoice1, radChoice2, radChoice3, radChoice4;
     private Button btnAnswer;
-    private int intRadioButton;
+    private int intRadioButton, intIndex;
 
 
     @Override
@@ -54,15 +56,19 @@ public class MainActivity extends ActionBarActivity {
                 //Setup RadioButton
                 switch (checkedId) {
                     case R.id.radioButton:
-                        
+                        intRadioButton = 1;
                         break;
                     case R.id.radioButton2:
+                        intRadioButton = 2;
                         break;
                     case R.id.radioButton3:
+                        intRadioButton = 3;
                         break;
                     case R.id.radioButton4:
+                        intRadioButton = 4;
                         break;
                     default:
+                        intRadioButton = 0;
                         break;
                 }   // switch
 
@@ -80,9 +86,45 @@ public class MainActivity extends ActionBarActivity {
                 //Sound Effect
                 MediaPlayer soundButton = MediaPlayer.create(getBaseContext(), R.raw.effect_btn_long);
                 soundButton.start();
+
+                //Check Answer
+                checkAnswer();
+
+
             }   // event
         });
     }   // buttonController
+
+    private void checkAnswer() {
+
+        if (intRadioButton == 0) {
+            Toast.makeText(MainActivity.this, "กรุณาตอบ คำถาม นะคะ", Toast.LENGTH_LONG).show();
+        } else {
+
+            //Check Times
+            checkTimes();
+
+        }
+
+    }   // checkAnswer
+
+    private void checkTimes() {
+
+        if (intIndex == 9) {
+
+            //Intent to ShowScore Activity
+            Intent objIntent = new Intent(MainActivity.this, ShowScoreActivity.class);
+            startActivity(objIntent);
+            finish();
+
+        } else {
+
+            //Controller Call View
+            txtQuestion.setText(Integer.toString(intIndex + 2) + ". What is this ?");
+            intIndex += 1;
+        }
+
+    }   // checkTimes
 
     private void initialWidget() {
         txtQuestion = (TextView) findViewById(R.id.txtQuestion);
