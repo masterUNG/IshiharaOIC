@@ -141,6 +141,9 @@ public class MainActivity extends ActionBarActivity {
                 //Check Answer
                 checkAnswer();
 
+                //Clear Check
+                ragChoice.clearCheck();
+
 
             }   // event
         });

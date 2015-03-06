@@ -26,7 +26,8 @@ public class ShowScoreActivity extends ActionBarActivity {
 
     public void clickPlay(View view) {
 
-        Intent objIntent = new Intent(ShowScoreActivity.this, MainActivity.class);
+        Intent objIntent = new Intent(ShowScoreActivity.this,
+                MainActivity.class);
         startActivity(objIntent);
         finish();
     }
