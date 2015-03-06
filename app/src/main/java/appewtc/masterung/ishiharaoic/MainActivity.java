@@ -25,6 +25,7 @@ public class MainActivity extends ActionBarActivity {
     private Button btnAnswer;
     private int intRadioButton, intIndex;
     private MyModel objMyModel;
+    private String strChoice[];
 
 
     @Override
@@ -70,10 +71,27 @@ public class MainActivity extends ActionBarActivity {
                 R.drawable.ishihara_07, R.drawable.ishihara_08,
                 R.drawable.ishihara_09, R.drawable.ishihara_10};
 
+        int[] intChoiceTimes = {R.array.times2, R.array.times2,
+                R.array.times3, R.array.times4, R.array.times5,
+                R.array.times6, R.array.times7, R.array.times8,
+                R.array.times9, R.array.times10};
+
         //Setup Image
         imvIshihara.setImageResource(intIshihara[intTimes]);
 
+        //Setup Choice
+        strChoice = getResources().getStringArray(intChoiceTimes[intTimes]);
+
+        setupChoice();
+
     } // changeView
+
+    private void setupChoice() {
+        radChoice1.setText(strChoice[0]);
+        radChoice2.setText(strChoice[1]);
+        radChoice3.setText(strChoice[2]);
+        radChoice4.setText(strChoice[3]);
+    }
 
     private void radioController() {
 
