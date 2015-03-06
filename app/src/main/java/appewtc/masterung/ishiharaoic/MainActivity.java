@@ -24,6 +24,7 @@ public class MainActivity extends ActionBarActivity {
     private RadioButton radChoice1, radChoice2, radChoice3, radChoice4;
     private Button btnAnswer;
     private int intRadioButton, intIndex;
+    private MyModel objMyModel;
 
 
     @Override
@@ -40,8 +41,39 @@ public class MainActivity extends ActionBarActivity {
         //Radio Controller
         radioController();
 
+        //Interface MyModel
+        interfaceMyModel();
+
 
     }   // onCreate
+
+    private void interfaceMyModel() {
+
+        objMyModel = new MyModel();
+        objMyModel.setOnMyModelChangeListener(new MyModel.OnMyModelChangeListener() {
+            @Override
+            public void onMyModelChangeListener(MyModel myModel) {
+
+                //Change View by MyModel
+                changeViewByMyModel(myModel.getIntButton());
+
+            }   // event
+        });
+
+    }   // interfaceMyModel
+
+    private void changeViewByMyModel(int intTimes) {
+
+        int[] intIshihara = {R.drawable.ishihara_01, R.drawable.ishihara_02,
+                R.drawable.ishihara_03, R.drawable.ishihara_04,
+                R.drawable.ishihara_05, R.drawable.ishihara_06,
+                R.drawable.ishihara_07, R.drawable.ishihara_08,
+                R.drawable.ishihara_09, R.drawable.ishihara_10};
+
+        //Setup Image
+        imvIshihara.setImageResource(intIshihara[intTimes]);
+
+    } // changeView
 
     private void radioController() {
 
@@ -122,7 +154,12 @@ public class MainActivity extends ActionBarActivity {
             //Controller Call View
             txtQuestion.setText(Integer.toString(intIndex + 2) + ". What is this ?");
             intIndex += 1;
-        }
+
+            //Sent Value to MyModel
+            objMyModel.setIntButton(intIndex);
+
+
+        }   // if
 
     }   // checkTimes
 
