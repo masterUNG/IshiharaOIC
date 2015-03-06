@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,7 +24,7 @@ public class MainActivity extends ActionBarActivity {
     private RadioGroup ragChoice;
     private RadioButton radChoice1, radChoice2, radChoice3, radChoice4;
     private Button btnAnswer;
-    private int intRadioButton, intIndex;
+    private int intRadioButton, intIndex, intUserChoose[], intAnswerTrue[], intScore;
     private MyModel objMyModel;
     private String strChoice[];
 
@@ -151,6 +152,9 @@ public class MainActivity extends ActionBarActivity {
             Toast.makeText(MainActivity.this, "กรุณาตอบ คำถาม นะคะ", Toast.LENGTH_LONG).show();
         } else {
 
+            //CheckScore
+            checkScore();
+
             //Check Times
             checkTimes();
 
@@ -158,13 +162,42 @@ public class MainActivity extends ActionBarActivity {
 
     }   // checkAnswer
 
+    private void checkScore() {
+
+        intUserChoose = new int[10];
+        intAnswerTrue = new int[10];
+        intAnswerTrue[0] = 1;
+        intAnswerTrue[1] = 2;
+        intAnswerTrue[2] = 3;
+        intAnswerTrue[3] = 1;
+        intAnswerTrue[4] = 2;
+        intAnswerTrue[5] = 3;
+        intAnswerTrue[6] = 1;
+        intAnswerTrue[7] = 2;
+        intAnswerTrue[8] = 4;
+        intAnswerTrue[9] = 4;
+
+        intUserChoose[intIndex] = intRadioButton;
+        if (intUserChoose[intIndex] == intAnswerTrue[intIndex]) {
+            intScore++;
+        }
+
+    }
+
     private void checkTimes() {
 
         if (intIndex == 9) {
 
             //Intent to ShowScore Activity
             Intent objIntent = new Intent(MainActivity.this, ShowScoreActivity.class);
+
+            objIntent.putExtra("Score", intScore);
+
             startActivity(objIntent);
+
+            //Show LogCat
+            Log.d("OIC", "Score ==> " + Integer.toString(intScore));
+
             finish();
 
         } else {

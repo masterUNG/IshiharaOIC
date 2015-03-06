@@ -1,18 +1,49 @@
 package appewtc.masterung.ishiharaoic;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 
 public class ShowScoreActivity extends ActionBarActivity {
+
+    private TextView txtShowScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_score);
+
+        //Show Score
+        showScore();
+
+    }   // onCreate
+
+
+    public void clickPlay(View view) {
+
+        Intent objIntent = new Intent(ShowScoreActivity.this, MainActivity.class);
+        startActivity(objIntent);
+        finish();
     }
+
+    public void clickExit(View view) {
+        finish();
+    }
+
+
+
+    private void showScore() {
+
+        int intMyScore = getIntent().getExtras().getInt("Score");
+        txtShowScore = (TextView) findViewById(R.id.txtShowScore);
+        txtShowScore.setText(Integer.toString(intMyScore) + "/10");
+
+    }   // showScore
 
 
     @Override
@@ -36,4 +67,4 @@ public class ShowScoreActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-}
+}   // Main Class
